@@ -18,7 +18,9 @@ export function Post({ title, summary, datetime }: PostProps) {
         </Text>
       </S.Header>
       <S.Summary>
-        <Text size="medium">{summary}</Text>
+        <Text size="medium" nowrap truncate>
+          {summary}
+        </Text>
       </S.Summary>
     </S.Wrapper>
   );
