@@ -1,5 +1,6 @@
 import { Heading } from '@app/components/Heading';
 import { Text } from '@app/components/Text';
+import { timeAgo } from '@app/utils/formatter';
 import * as S from './styles';
 
 export type PostProps = {
@@ -14,7 +15,7 @@ export function Post({ title, summary, datetime }: PostProps) {
       <S.Header>
         <Heading size="medium">{title}</Heading>
         <Text size="small" nowrap>
-          {datetime}
+          {timeAgo(datetime)}
         </Text>
       </S.Header>
       <S.Summary>

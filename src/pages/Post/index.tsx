@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { Heading } from '@app/components/Heading';
 import { Info } from '@app/components/Info';
+import { timeAgo } from '@app/utils/formatter';
 import { PostModel } from '@app/utils/models';
 import * as S from './styles';
 
@@ -54,7 +55,7 @@ export function Post() {
               <Info.Icon>
                 <FontAwesomeIcon icon={faCalendarDay} />
               </Info.Icon>
-              <Info.Label>{post.created_at}</Info.Label>
+              <Info.Label>{timeAgo(post.created_at)}</Info.Label>
             </Info.Item>
             <Info.Item>
               <Info.Icon>
