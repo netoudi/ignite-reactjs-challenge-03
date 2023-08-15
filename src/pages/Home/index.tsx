@@ -4,6 +4,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faArrowUpRightFromSquare, faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import { useDebouncedCallback } from 'use-debounce';
 import { Box } from '@app/components/Box';
 import { Grid } from '@app/components/Grid';
 import { Heading } from '@app/components/Heading';
@@ -16,6 +17,11 @@ import * as S from './styles';
 export function Home() {
   const [user, setUser] = React.useState<UserModel | null>(null);
   const [posts, setPosts] = React.useState<PostModel[]>([]);
+  const [search, setSearch] = React.useState<string>('');
+
+  const debounced = useDebouncedCallback((value) => {
+    setSearch(value);
+  }, 1000);
 
   React.useEffect(() => {
     axios.get('https://api.github.com/users/rocketseat-education').then((response) => {
@@ -27,6 +33,14 @@ export function Home() {
         setPosts(response.data.items);
       });
   }, []);
+
+  React.useEffect(() => {
+    axios
+      .get(`https://api.github.com/search/issues?q=${search}%20repo:rocketseat-education/reactjs-github-blog-challenge`)
+      .then((response) => {
+        setPosts(response.data.items);
+      });
+  }, [search]);
 
   const totalPost = posts.length;
 
@@ -82,7 +96,7 @@ export function Home() {
           <Text size="small">{totalPost} publicações</Text>
         </S.Header>
         <form>
-          <input type="text" placeholder="Buscar conteúdo" />
+          <input type="text" placeholder="Buscar conteúdo" onChange={(e) => debounced(e.target.value)} />
         </form>
       </S.Search>
 
