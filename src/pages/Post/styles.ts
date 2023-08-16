@@ -47,14 +47,48 @@ export const PostContent = styled.div`
     color: ${theme.colors['base-text']};
 
     font-family: ${theme.font.family};
-    font-size: ${theme.font.sizes.medium};
+    font-size: ${theme.font.sizes.large};
     font-style: normal;
     font-weight: ${theme.font.normal};
     line-height: 160%;
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: ${theme.colors['base-title']};
+      margin-top: ${theme.spacings.small};
+      margin-bottom: ${theme.spacings.xsmall};
+    }
+
+    p {
+      margin-bottom: ${theme.spacings.xsmall};
+    }
+
     a {
       color: ${theme.colors.blue};
-      text-decoration: underline;
+      transition: ${theme.transition.default};
+
+      &:hover {
+        border-bottom: 1px solid ${theme.colors.blue};
+      }
+    }
+
+    img {
+      max-width: min(70rem, 100%);
+      margin-bottom: ${theme.spacings.xsmall};
+    }
+
+    ul,
+    ol {
+      padding: ${theme.spacings.xsmall} ${theme.spacings.small};
+    }
+
+    pre,
+    hr {
+      margin: ${theme.spacings.small} 0;
     }
   `};
 `;

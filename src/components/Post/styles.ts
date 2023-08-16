@@ -3,9 +3,16 @@ import styled, { css } from 'styled-components';
 export const Wrapper = styled.div`
   ${({ theme }) => css`
     width: 100%;
+    height: 100%;
     border-radius: ${theme.border.radius};
     background: ${theme.colors['base-post']};
     padding: ${theme.spacings.medium};
+    border: 2px solid transparent;
+    transition: ${theme.transition.fast};
+
+    &:hover {
+      border: 2px solid ${theme.colors['base-label']};
+    }
   `}
 `;
 
